@@ -160,7 +160,7 @@ def update_memory_cost_periodically():
 def fetch_difficulty_from_server():
     global memory_cost
     try:
-        response = requests.get('http://xenminer.mooo.com/difficulty')
+        response = requests.get('http://xenminer.mooo.com/difficulty', timeout=20)
         response_data = response.json()
         return str(response_data['difficulty'])
     except Exception as e:
@@ -184,7 +184,7 @@ def submit_pow(account_address, key, hash_to_verify):
 
     try:
         # Attempt to download the last block record
-        response = requests.get(url, timeout=10)  # Adding a timeout of 10 seconds
+        response = requests.get(url, timeout=20)  # Adding a timeout of 10 seconds
     except requests.exceptions.RequestException as e:
         # Handle any exceptions that occur during the request
         print(f"An error occurred: {e}")
